@@ -241,3 +241,111 @@ $ git pull upstream master
 ```
 
 若想修改他人專案，則需要使用`pull request`。
+
+## Pull Request的申請與應用
+
+簡單說，就是把你的fork專案融合進master主人中。
+
+![分支操作模型](branch_oper_model.png)
+
+其他分支要合併回master，就是pull request登場的時候
+
+## 解決分支合併時遇到的衝突
+
+### 衝突訊息的判讀
+
+```
+<<<<<<< HEAD
+本地儲存庫的程式內容
+=======
+遠端儲存庫的程式內容
+>>>>>>> 某個分支名稱 或 commitID
+```
+
+透過線上版github的pull request來解決衝突比較友善，同時也是github近期推出的功能。
+
+## 回復歷史資料
+
+### 顯示提交的歷史紀錄
+
+```
+$ git log
+```
+
+### 比較commit之間的關係
+
+```
+$ git diff <commitID 1> <commitID 2>
+```
+
+### 回復之前的版本
+
+```
+$ git checkout <commit ID>
+```
+
+只回復特定檔案之前的版本：
+
+```
+$ git checkout <commit ID> <檔案名稱>
+```
+
+## .gitignore的建立與注意事項
+
+`.gitignore`：
+
+```
+secret.txt
+.DS_Store
+# my first git ignore file
+*.c
+```
+
+### 把所有更改過的檔案加入暫存區
+
+```
+$ git add .
+```
+
+### 刪除遠端(雲端)的檔案：
+
+```
+$ git rm <檔案名稱>
+```
+
+### 一勞永逸的忽略清單方法
+
+```
+$ vim ~/.gitignore_global
+```
+
+### 設定全域 .gitignore 檔案
+
+```
+$ git config --global core.excludesfile ~/.gitignore_global
+```
+
+## 使用github建立專屬靜態網頁
+
+- 個人介紹網頁(1)
+
+    1. new repository name：`<使用者帳號>.github.io`
+    2. origin master下才有功用
+
+- 專案介紹網頁(*)
+
+    `<使用者帳號>.github.io/<專案名稱>`
+    
+可調整url成你購買的網域
+
+1. 創立CNAME檔案
+2. 填寫網域為內容
+3. setting的Custom domain
+4. 到購買網域的供應商設置github的ip位址
+
+    1. Google Search：github page custom domain ip(找原廠官方說明文件)
+
+        - 192.30.252.153
+        - 192.30.252.154
+    
+    2. 增加“A”的屬性(.153, .154都要設)
